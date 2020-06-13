@@ -1,6 +1,3 @@
-# from splinter import Browser
-# from bs4 import BeautifulSoup as bs
-# import time
 
 # Dependencies
 from bs4 import BeautifulSoup
@@ -13,11 +10,6 @@ from selenium import webdriver
 import time
 
 
-def init_browser():
-    #Path to the chromedriver
-    executable_path = {'executable_path': 'chromedriver.exe'}
-    #executable_path = {"executable_path": "/usr/local/bin/chromedriver"}
-    return Browser("chrome", **executable_path, headless=False)
 
 
 def scrape_info():
@@ -53,11 +45,21 @@ def scrape_info():
     string_footer= string_footer.split('data-fancybox-href="')[1].split('" data-link')[0]
     featured_image_url = 'https://www.jpl.nasa.gov' + string_footer
 
-    
+    #MARS WEATHER TWITTER
+
+    url = 'https://twitter.com/MarsWxReport'
+    driver = webdriver.Chrome()
+    driver.implicitly_wait(5) # seconds
+    driver.get(url)
+
+    element = driver.find_element_by_class_name("css-901oao")
+    tweet = element.text
+
+
     # MARS FACTS
 
     url = "https://space-facts.com/mars/"
-    tables = pd.read_html(url)
+    tables = pd.read_html(url, index_col = 0)
     mars_facts_df = tables[0]
     html_table = mars_facts_df.to_html()
 
@@ -90,80 +92,11 @@ def scrape_info():
     #Hard coding values scraped earlier when the site was working
     hemi_list = ['Cerberus Hemisphere ', 'Schiaparelli Hemisphere ', 'Syrtis Major Hemisphere ', 'Valles Marineris Hemisphere ']
     link_list = ['https://astrogeology.usgs.gov/cache/images/f5e372a36edfa389625da6d0cc25d905_cerberus_enhanced.tif_full.jpg', 'https://astrogeology.usgs.gov/cache/images/3778f7b43bbbc89d6e3cfabb3613ba93_schiaparelli_enhanced.tif_full.jpg', 'https://astrogeology.usgs.gov/cache/images/555e6403a6ddd7ba16ddb0e471cadcf7_syrtis_major_enhanced.tif_full.jpg', 'https://astrogeology.usgs.gov/cache/images/b3c7c6c9138f57b4756be9b9c43e3a48_valles_marineris_enhanced.tif_full.jpg']
-    hemi_dictionary = dict(zip(hemi_list, link_list))
 
     #WRITE ALL TO DICT
 
-    mars_dict = {"article_title": title, "article_excerpt": article, "feature_image": featured_image_url, "fact_table": html_table, "hemisphere_pictures": hemi_dictionary, "hemisphere_list": hemi_list, "hemisphere_pic": link_list}
+    mars_dict = {"article_title": title, "article_excerpt": article, "feature_image": featured_image_url, "fact_table": html_table, "mars_weather": tweet,  "hemisphere_list": hemi_list, "hemisphere_pic": link_list}
 
 
     return(mars_dict)
 
-
-
-
-    # browser = init_browser()
-
-    # # Visit visitcostarica.herokuapp.com
-    # url = "https://visitcostarica.herokuapp.com/"
-    # browser.visit(url)
-
-    # time.sleep(1)
-
-    # # Scrape page into Soup
-    # html = browser.html
-    # soup = bs(html, "html.parser")
-
-    # # Get the average temps
-    # avg_temps = soup.find('div', id='weather')
-
-    # # Get the min avg temp
-    # min_temp = avg_temps.find_all('strong')[0].text
-
-    # # Get the max avg temp
-    # max_temp = avg_temps.find_all('strong')[1].text
-
-    # # BONUS: Find the src for the sloth image
-    # relative_image_path = soup.find_all('img')[2]["src"]
-    # sloth_img = url + relative_image_path
-
-    # # Store data in a dictionary
-    # costa_data = {
-    #     "sloth_img": sloth_img,
-    #     "min_temp": min_temp,
-    #     "max_temp": max_temp
-    # }
-
-    # # Close the browser after scraping
-    # browser.quit()
-
-    # # Return results
-    # return costa_data
-
-
-
-
-# TEST DB INSERT 
-
-# import pymongo
-# # Setup connection to mongodb
-# conn = "mongodb://localhost:27017"
-# client = pymongo.MongoClient(conn)
-
-# # Select database and collection to use
-# db = client.mars_app
-# facts = db.facts
-# print("db set up")
-
-# Run the scrape function
-#MARS FACTS
-
-# url = "https://space-facts.com/mars/"
-# tables = pd.read_html(url)
-# mars_facts_df = tables[0]
-# html_table = mars_facts_df.to_html()
-# mars_dict = {"fact_table": html_table}
-
-# facts.insert(mars_dict)
-
-# print("Data Uploaded!")

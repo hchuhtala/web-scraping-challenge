@@ -20,73 +20,64 @@
   <div class="container-fluid">
     <div class="jumbotron text-center">
       <h1>Learn About Mars</h1>
-      <p>Beach. Rainforest. Volcano. Tree House. Sloths.</p>
-      <p><a class="btn btn-primary btn-lg" href="/scrape" role="button">Get Data!</a></p>
+      <p><a class="btn btn-primary btn-lg" href="/scrape" role="button">Update Data!</a></p>
     </div>
 
-<!-- !PAGE CONTENT! -->
-<div class="w3-main w3-content w3-padding" style="max-width:1200px;margin-top:100px">
+  <!-- !PAGE CONTENT! -->
+  <div class="w3-main w3-content w3-padding" style="max-width:1200px;margin-top:100px">
 
-  <!-- First Photo Grid-->
-  <div class="w3-row-padding w3-padding-16 w3-center" id="food">
-    <h2>Mars' Hemispheres</h2>
-    <div class="w3-quarter">
-      <img src= {{mars_dict.hemisphere_pic[0]}} alt="{{mars_dict.hemisphere_list[0]}}" style="width:100%">
-      <h3>{{mars_dict.hemisphere_list[0]}}</h3>
-    </div>
-    <div class="w3-quarter">
-      <img src={{mars_dict.hemisphere_pic[1]}} alt="{{mars_dict.hemisphere_list[1]}}" style="width:100%">
-      <h3>{{mars_dict.hemisphere_list[1]}}</h3>
-    </div>
-    <div class="w3-quarter">
-      <img src={{mars_dict.hemisphere_pic[2]}} alt="{{mars_dict.hemisphere_list[2]}}" style="width:100%">
-      <h3>{{mars_dict.hemisphere_list[2]}}</h3>
-    </div>
-    <div class="w3-quarter">
-      <img src={{mars_dict.hemisphere_pic[3]}} alt="{{mars_dict.hemisphere_list[3]}}" style="width:100%">
-      <h3>{{mars_dict.hemisphere_list[3]}}</h3>
+          <!-- Photo Grid-->
+      <div class="w3-row-padding w3-padding-16 w3-center">
+        <div class="w3-half">
+          <h3>{{ mars_dict.article_title}}</h3>
+          <p>{{ mars_dict.article_excerpt}}</p>
+        </div>
+        <div class="w3-half">
+          <h3>Latest Weather on Mars</h3>
+          <p>Placeholder</p> 
+        </div>
+      </div>
+  </div>
+
+  <div class="w3-main w3-content w3-padding" style="max-width:1200px;margin-top:100px">       
+
+   <!-- Photo Grid-->
+    <div class="w3-row-padding w3-padding-16 w3-center">
+      <h2>Mars' Hemispheres</h2>
+      <div class="w3-quarter">
+        <img src= {{mars_dict.hemisphere_pic[0]}} alt="{{mars_dict.hemisphere_list[0]}}" style="width:100%">
+        <h3>{{mars_dict.hemisphere_list[0]}}</h3>
+      </div>
+      <div class="w3-quarter">
+        <img src={{mars_dict.hemisphere_pic[1]}} alt="{{mars_dict.hemisphere_list[1]}}" style="width:100%">
+        <h3>{{mars_dict.hemisphere_list[1]}}</h3>
+      </div>
+      <div class="w3-quarter">
+        <img src={{mars_dict.hemisphere_pic[2]}} alt="{{mars_dict.hemisphere_list[2]}}" style="width:100%">
+        <h3>{{mars_dict.hemisphere_list[2]}}</h3>
+      </div>
+      <div class="w3-quarter">
+        <img src={{mars_dict.hemisphere_pic[3]}} alt="{{mars_dict.hemisphere_list[3]}}" style="width:100%">
+        <h3>{{mars_dict.hemisphere_list[3]}}</h3>
+      </div>
     </div>
   </div>
 
 
   <div class="w3-main w3-content w3-padding" style="max-width:1200px;margin-top:100px">
 
-    <!-- First Photo Grid-->
-    <div class="w3-row-padding w3-padding-16 w3-center" id="food">
+    <!-- Photo Grid-->
+    <div class="w3-row-padding w3-padding-16 w3-center">
       <div class="w3-half">
         <img src= {{mars_dict.feature_image}} alt="featured space image" style="width:100%">
         <h3>Featured Image from the Jet Propulsion Laboratory</h3>
       </div>
       <div class="w3-half">
         <h3>Mars Facts</h3>
-        <table class= "table .table-striped">{{ mars_dict.fact_table| safe }} </table> 
-
+        <table class= "table-center .table-striped">{{ mars_dict.fact_table| safe }} </table> 
       </div>
-
-   <div class="w3-main w3-content w3-padding" style="max-width:1200px;margin-top:100px">
-
-        <!-- First Photo Grid-->
-     <div class="w3-row-padding w3-padding-16 w3-center" id="food">
-       <div class="w3-half">
-         <h3>{{ mars_dict.article_title}}</h3>
-         <p>{{ mars_dict.article_excerpt}}</p>
-       </div>
-       <div class="w3-half">
-         <h3>Latest Weather on Mars</h3>
-         <p>Placeholder</p> 
-    
-       </div>
-
-
-    <!-- <div>{{ mars_dict.fact_table| safe }} </div>
-    <div>{{ mars_dict.article_title}} {{ mars_dict.article_excerpt}}</div>
-    <div>{{mars_dict.hemisphere_pictures['Cerberus Hemisphere ']}}</div>
-     -->
-
+    </div>
   </div>
-  </div>
-
-
 
 
 </body>
