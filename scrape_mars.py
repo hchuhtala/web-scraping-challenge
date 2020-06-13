@@ -54,7 +54,7 @@ def scrape_info():
 
     element = driver.find_element_by_class_name("css-901oao")
     tweet = element.text
-
+    
 
     # MARS FACTS
 
@@ -89,9 +89,11 @@ def scrape_info():
         #Go Back a Page
         browser.visit(url)
 
+
     #Hard coding values scraped earlier when the site was working
     hemi_list = ['Cerberus Hemisphere ', 'Schiaparelli Hemisphere ', 'Syrtis Major Hemisphere ', 'Valles Marineris Hemisphere ']
     link_list = ['https://astrogeology.usgs.gov/cache/images/f5e372a36edfa389625da6d0cc25d905_cerberus_enhanced.tif_full.jpg', 'https://astrogeology.usgs.gov/cache/images/3778f7b43bbbc89d6e3cfabb3613ba93_schiaparelli_enhanced.tif_full.jpg', 'https://astrogeology.usgs.gov/cache/images/555e6403a6ddd7ba16ddb0e471cadcf7_syrtis_major_enhanced.tif_full.jpg', 'https://astrogeology.usgs.gov/cache/images/b3c7c6c9138f57b4756be9b9c43e3a48_valles_marineris_enhanced.tif_full.jpg']
+
 
     #WRITE ALL TO DICT
 
