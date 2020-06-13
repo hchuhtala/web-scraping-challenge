@@ -8,7 +8,7 @@ import pymongo
 app = Flask(__name__)
 
 # # Use PyMongo to establish Mongo connection
-# mongo = PyMongo(app, uri="mongodb://localhost:27017/mars_app")
+mongo = PyMongo(app, uri="mongodb://localhost:27017/mars_app")
 
 # # Setup connection to mongodb
 # conn = "mongodb://localhost:27017"
@@ -19,16 +19,25 @@ app = Flask(__name__)
 # facts = db.facts
 
 
+# # Setup connection to mongodb
+# conn = "mongodb://localhost:27017"
+# client = pymongo.MongoClient(conn)
+
+# # Select database and collection to use
+# db = client.mars_app
+# facts = db.facts
+print("db set up")
+
 # Route to render index.html template using data from Mongo
 @app.route("/")
 def home():
 
     # return("hi this is the homepage")
     # # Find one record of data from the mongo database
-    # destination_data = mongo.db.collection.find_one()
+    mars_dict = mongo.db.facts.find_one()
 
     # Return template and data
-    return render_template("index.html", facts)
+    return render_template("index.html", mars_dict=mars_dict)
 
 
 # Route that will trigger the scrape function
@@ -36,15 +45,11 @@ def home():
 def scrape():
 
     # Run the scrape function
-    #mars_data = scrape_mars.scrape_info()
-    scrape_mars.scrape_info()
+    mars_dict = scrape_mars.scrape_info()
 
-    # # Update the Mongo database using update and upsert=True
-    # mongo.db.collection.update({}, mars_data, upsert=True)
-
-    # write a statement that finds all the items in the db and sets it to a variable
-    inventory = list(facts.find())
-    print(inventory)
+    # # Update the Mongo database
+    mongo.db.facts.update({}, mars_dict, upsert=True)
+    print("scrape done")
 
     # Redirect back to home page
     return redirect("/")
